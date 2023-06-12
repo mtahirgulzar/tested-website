@@ -101,7 +101,7 @@ const Navbar = ({ data, navServices }) => {
                 </Link>
               </div>
             ))}
-            <Link href="tel:925-933-5677" >
+            <Link href={`tel:+${`925-933-5677`}`}  >
               <p className="xl:ml-[15px] ml-[4px] bg-[#5F2EEA] text-white text-[15px] leading-[15px] font-[500] py-[10px] px-[15px] rounded-3xl">
                 Call Us
               </p>
