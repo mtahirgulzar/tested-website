@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { imageResolver } from "../../../utils/image-resolver";
+import Image from "next/image";
 
 const Hero = ({ data }) => {
   return (
@@ -25,11 +26,23 @@ const Hero = ({ data }) => {
             </p>
             <div className="mt-[52px] gap-x-[20px] flex md:flex-row flex-col md:gap-0 gap-[10px]  items-center md:pb-[304px] pb-0">
               <div className="w-full md:w-auto">
-                <Link href={(data?.hero && data?.hero.cta && data?.hero.cta[0].link) || "/"} legacyBehavior>
-                  <a href="" className="" title={data?.hero && data?.hero.cta && data?.hero.cta[0].name}>
-                  <button className="lg:px-[50px] px-3 w-full md:w-auto   py-[13px] bg-[#5F2EEA] rounded-[40px] text-[16px] leading-[28px]  font-[600] text-white ">
-                    {data?.hero && data?.hero.cta && data?.hero.cta[0].name}
-                  </button>
+                <Link
+                  href={
+                    (data?.hero && data?.hero.cta && data?.hero.cta[0].link) ||
+                    "/"
+                  }
+                  legacyBehavior
+                >
+                  <a
+                    href=""
+                    className=""
+                    title={
+                      data?.hero && data?.hero.cta && data?.hero.cta[0].name
+                    }
+                  >
+                    <button className="lg:px-[50px] px-3 w-full md:w-auto   py-[13px] bg-[#5F2EEA] rounded-[40px] text-[16px] leading-[28px]  font-[600] text-white ">
+                      {data?.hero && data?.hero.cta && data?.hero.cta[0].name}
+                    </button>
                   </a>
                 </Link>
               </div>
@@ -159,27 +172,33 @@ const Hero = ({ data }) => {
           </div>
         </div>
       </div>
-      {/* <img src={imageResolver(data?.background).path} alt="" className="absolute top-0 left-0 z-0 w-full h-fit" /> */}
-      {/* <OurServices/> */}
-      {/* <OurServices data={pageData?.blogTitle} cardsData={cutServices}/> */}
+
       <div className="flex sm:flex-row flex-col items-center justify-center gap-[25px] md:mt-30 mt-15 pt-17 pb-20">
         <p className="text-[24px] leading-[38px] text-[#4e4b66] ">
           {data?.blogTitle?.tagline}
         </p>
         <div>
-          {data?.blogTitle?.image?.data !== null ? (
-            <img
+          {data?.blogTitle?.image?.data ? (
+            <Image
               src={imageResolver(data?.blogTitle?.image).path}
               alt={data?.blogTitle?.image?.data?.attributes?.alternativeText}
               className=""
               loading="lazy"
+              width={60}
+              height={60}
+              loader={() => imageResolver(data?.blogTitle?.image).path}
             />
           ) : (
-            <img
+            <Image
               src={`https://adminpwdds.vigorant.xyz/uploads/${pathImage}`}
               alt={pathImage?.attributes?.alternativeText}
               className=""
-              loading="lazzy"
+              width={60}
+              height={60}
+              loader={() =>
+                `https://adminpwdds.vigorant.xyz/uploads/${pathImage}`
+              }
+              loading="lazy"
             />
           )}
         </div>
