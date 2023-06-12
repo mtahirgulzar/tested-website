@@ -2,7 +2,6 @@ import React from "react";
 import { imageResolver } from "../../../utils/image-resolver";
 
 const CardsPosts = ({ data }) => {
-  console.log("data",data)
   return (
     <div>
       <div className="cursor-pointer">

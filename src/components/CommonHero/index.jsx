@@ -3,7 +3,6 @@ import React from "react";
 import { imageResolver } from "../../../utils/image-resolver";
 
 const CommonHero = ({ data, testimonial, blog }) => {
-  console.log("")
   return (
     <>
       <div 

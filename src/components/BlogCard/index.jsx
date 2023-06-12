@@ -2,7 +2,6 @@ import React from "react";
 import ServiceCards from "../Services/ServiceCards";
 
 const BlogCard = ({ data, home, dental, cardsData, itemOffset }) => {
-  console.log("BlogDAta--,", cardsData);
 
   return (
     <div>

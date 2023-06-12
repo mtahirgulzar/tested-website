@@ -10,14 +10,11 @@ const OurServices = ({ data, home, dental, cardsData }) => {
     "Root Canal Therapy"
   ]
 const {asPath}= useRouter()
-  console.log("dental",   dental)
 
 const filteredHomeServicesCards=cardsData&& asPath==="/"?cardsData?.filter((item)=>{
 return titles.includes(item.attributes.title)
 }):cardsData
-console.log("filteredHomeServicesCards",   filteredHomeServicesCards)
 
-  console.log("cardsData",   cardsData)
   return (
     <div >
       <section
