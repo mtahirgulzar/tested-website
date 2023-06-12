@@ -30,11 +30,11 @@ const Towel = ({data}) => {
               </h2>
                   { data?.testimonials?.map(({id,title,description, index}) =>{
                     return (
-                      <TowelCards title={title} description={description} id={id} key={index}/>
+                      <div key={index}>
+                      <TowelCards title={title} description={description} id={id} />
+                       </div>
                     );
-
                   })
-                     
                   }
             </div>
           </div>
