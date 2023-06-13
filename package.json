@@ -10,11 +10,8 @@
 		"sitemap": "next-sitemap --config ./next-sitemap.config.js",
 		"postbuild": "next-sitemap --config ./next-sitemap.config.js"
 	},
-	"dependencies": {
-		"@emailjs/browser": "^3.7.0",
-		"axios": "^0.27.2",
-		"dotenv": "^16.0.3",
-		"gray-matter": "^4.0.3",
+	"dependencies": {  
+		"dotenv": "^16.0.3", 
 		"moment": "^2.29.4",
 		"next": "12.2.5",
 		"next-sitemap": "^3.1.22",
@@ -27,9 +24,7 @@
 		"react-slick": "^0.29.0",
 		"react-toastify": "^9.1.1",
 		"slick-carousel": "^1.8.1",
-		"turndown": "^7.1.1",
-		"uuidv4": "^6.2.13",
-		"xml2js": "^0.4.23"
+		"turndown": "^7.1.1" 
 	},
 	"devDependencies": {
 		"autoprefixer": "^10.4.8",
