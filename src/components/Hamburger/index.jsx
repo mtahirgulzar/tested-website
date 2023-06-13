@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
 import Link from "next/link";
+import ExSub from "../common/exSub";
+import Modal from "../common/ModalCard";
+
 
 const Hamburger = ({
-  isSubMenu1,
-  isSubMenu2,
+  isSubMenu,
   isMenu,
-  setIsSubmenu1,
-  setIsSubmenu2,
+  setIsSubmenu,
   setIsMenu,
   data,
-  staff,
   navServices,
+  dropdown,
+  toggle,
+  isShowing,
+  ourservices, 
+ 
+  navCat
 }) => {
+  const [exSub, setExSub] = useState()
+  const FilteredCat = (cb) => {
+    const resulteditem = navServices?.filter((item) => item?.attributes?.services_categories?.data[0]?.attributes?.name === cb)
+    return resulteditem;
+  }
   return (
     <>
       {" "}
       {!isMenu && (
         <span
           onClick={() => setIsMenu(!isMenu)}
-          className="px-4 transition-all duration-500 ease-linear"
+          className="transition-all duration-500 ease-linear px-4"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,9 +50,9 @@ const Hamburger = ({
       {isMenu && (
         <span
           onClick={() => {
-            setIsMenu(!isMenu), setIsSubmenu1(false), setIsSubmenu2(false);
+            setIsMenu(!isMenu), setIsSubmenu(false);
           }}
-          className="px-4 transition-all duration-500 ease-linear"
+          className="transition-all duration-500 ease-linear px-4"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,115 +67,75 @@ const Hamburger = ({
         </span>
       )}
       {isMenu && (
-        <div className="bg-white  z-50 min-h-[300px] absolute left-0 top-[100px] w-full shadow-lg">
+        <div className="bg-white z-50 min-h-[300px] absolute left-0 top-[76px] w-full shadow-lg">
           {data?.navItems?.map((item, index) => (
             <ul key={index} className="w-full">
               <li
                 className={`px-[30px] py-[21px]  cursor-pointer transition-all ease duration-500 ${styles.cusHover}`}
               >
-                <Link href={`${item.link}`}>
-                  <>
-                    {" "}
-                    <div
-                      onClick={() => {
-                        index === 1 && setIsSubmenu1(!isSubMenu1),
-                          index === 2 && setIsSubmenu2(!isSubMenu2);
-                      }}
-                      className={`flex cursor-pointer ${styles.cusMenu} flex-col`}
+                <>
+                  {" "}
+                  <div
+                                        className={`flex cursor-pointer ${styles.cusMenu} flex-col relative`}
+                  >
+                    {index === 1 ? <p
+                      className={`text-[15px] leading-[20px] font-[400] text-[#3B5266] transition-all ease duration-500 flex ${styles.hoverText}`}
                     >
-                      <p
-                        className={`text-[15px] leading-[20px] font-[400] text-[#3B5266] transition-all ease duration-500 flex ${styles.hoverText}`}
-                      >
-                          {item.title}
+                      <a href="/services">
+
+                      {item.title} 
+                      </a>
+                      {index === 1 && (
                         <>
-                          {index === 1 && (
-                            <>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="10"
-                                height="10"
-                                fill="currentColor"
-                                className="bi bi-caret-down-fill ml-[5px]"
-                                viewBox="0 0 16 16"
-                              >
-                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                              </svg>
-                            </>
-                          )}
-                          {index === 2 && (
-                            <>
-                              <span>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="10"
-                                  height="10"
-                                  fill="currentColor"
-                                  className="bi bi-caret-down-fill ml-[5px]"
-                                  viewBox="0 0 16 16"
-                                >
-                                  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                </svg>
-                              </span>
-                            </>
-                          )}
+                          <span onClick={() => index === 1 && setIsSubmenu(!isSubMenu)}
+ className=" z-50">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </span>
                         </>
-                      </p>
-                    </div>
-                  </>
-                </Link>
+                      )}
+                      
+                    </p> :  index === 5 ? (
+                        <span onClick={toggle}>{item.title}</span>
+                      ) : (
+                        <Link href={`${item.link}`}><a href={`${item.link}`} className="">{item.title} </a></Link>
+                      )
+                     
+                    }
+  <Modal
+                      isShowing={isShowing}
+                      hide={toggle}
+                      ourservices={ourservices}
+                    />
+                  </div>
+                </>
               </li>
-              <>
-                {index === 1 && (
-                  <>
-                    {isSubMenu1 && (
-                      <div
-                        className={` w-full transition-all duration-3000 ease  z-50 bg-white  `}
-                      >
-                        <ul className={` bg-white`}>
-                          {staff?.map((item, index) => (
-                            <Link key={index} href={item.link || "/"}>
-                              <li
-                                className={`px-[30px] py-[13px] transition-all ease duration-500 ${styles.cusHover}`}
-                              >
-                                <p
-                                  className={`${styles.hoverText} transition-all ease duration-500 text-[12px] leading-[15px] pl-[10px]`}
-                                >
-                                  {item.attributes.title}
-                                </p>
-                              </li>
-                            </Link>
-                          ))}
-                        </ul>
+              {index === 1 && isSubMenu && (
+                <div className="justify-center ">
+                  {navCat?.map((item, index) => {
+                    const subMenuData = FilteredCat(item.attributes.name)
+                    return (
+                      <div key={index} className="px-[30px]">
+                        <ExSub setExSub={setExSub} subMenuData={subMenuData} exSub={exSub} item={item} services={navServices} />
+
                       </div>
-                    )}
-                  </>
-                )}
-                {index === 2 && (
-                  <>
-                    {isSubMenu2 && (
-                      <div
-                        className={` w-full transition-all duration-3000 ease  z-50 bg-white  `}
-                      >
-                        <ul className={` bg-white`}>
-                          {navServices?.map((item, index) => (
-                            <Link key={index} href={item.link || "/"} >
-                              <li
-                                className={`px-[30px] py-[13px] text-black transition-all ease duration-500 ${styles.cusHover}`}
-                              >
-                                <p
-                                  className={`${styles.hoverText} transition-all ease duration-500 text-[12px] leading-[15px] pl-[10px]`}
-                                >
-                                    {item?.attributes.title}
-                                </p>
-                              </li>
-                            </Link>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </>
-                )}
-              </>
+                    )
+
+                  })}
+
+
+                </div>
+              )}
             </ul>
           ))}
         </div>

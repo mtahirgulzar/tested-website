@@ -1,12 +1,18 @@
 import React from "react";
-import Navbar from "../Navbar"; 
+import dynamic from 'next/dynamic'; 
+const Navbar = dynamic(()=>import("../Navbar"))
+const Footer = dynamic(()=>import("../Footer"))
+const Header = dynamic(()=>import("../Header"))
 
-const Layout = ({ children, data, navServices }) => {
+const Layout = ({ children, SeoData, data, navServices , ourservices , navCat }) => {
+  
   return (
     <>
-      <div className="flex flex-col justify-between">
-        <Navbar data={data?.header} navServices={navServices} />
+      {SeoData && <Header data={SeoData}/>}
+      <div className="flex flex-col justify-between ">
+        <Navbar data={data?.header} navServices={navServices} ourservices={ourservices} navCat={navCat} />
         <div className="flex-1">{children}</div>
+        <Footer data={data?.footer&&data.footer[0]}  ourservices={ourservices}/>
       </div>
     </>
   );

@@ -1,26 +1,22 @@
-import React from "react";
-import TeamDentists from "./TeamDentists";
-import BlogBody from "../BlogBody";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import React from 'react'
+import Title from '../common/Title'
+import ServiceCard from './ServiceCard'
 
-const OurDentists = ({ dentists, cards, description, desk }) => {
-  return (
-    <>
-      <div>
-        <div className="max-w-[1200px] lg:px-0 px-4 mx-auto py-[50px]">
-          <BlogBody cusClass={"custom-our-patient"} data={description} team />
-          <TeamDentists data={dentists} />
-          <div className="grid md:grid-cols-3  md:gap-x-[20px] gap-y-[20px]">
-            {desk?.map((item, index) => (
-              <div key={index} className="cus-our-desk">
-                <ReactMarkdown>{item?.details}</ReactMarkdown>
-              </div>
-            ))}
-          </div>
+const OurDentists = ({ data,title }) => {
+    return (
+        <div className="bg-[#7F7C59]">
+            <div className="py-[75px]">
+                <Title data={title}/>
+                <div className="max-w-[1156px] mx-auto px-4 my-[30px]">
+                    <div className="grid  md:grid-cols-2 grid-cols-1 lg:gap-x-[24px] md:gap-x-[16px] sm:gap-y-[26px] gap-y-[24px]">
+                        {data?.map((item, index) => (
+                          <ServiceCard item={item} key={index} />
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </>
-  );
-};
+    )
+}
 
-export default OurDentists;
+export default OurDentists

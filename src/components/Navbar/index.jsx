@@ -1,133 +1,103 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { imageResolver } from "../../../utils/image-resolver";
+import { imageResolver } from "../../../utils/helpers";
+import dynamic from 'next/dynamic'; 
+const Hamburger = dynamic(()=>import("../Hamburger"));
+const Modal = dynamic(()=>import("../common/ModalCard"));
+const MegaMenu = dynamic(()=>import("../common/megaMenu"));
+import useModal from "../../../utils/useModal";
+import styles from "./style.module.css";
 import { useRouter } from "next/router";
-import Hamburger from "../Hamburger";
-import Dropdown from "./Dropdown";
 import Image from "next/image";
 
-const Navbar = ({ data, navServices }) => {
+
+function Header({ data, navServices, ourservices, navCat }) {
   const router = useRouter();
   const currentRoute = router.pathname.slice(0);
+  const { isShowing, toggle } = useModal();
   const [isMenu, setIsMenu] = useState(false);
-  const [isSubMenu1, setIsSubmenu1] = useState(false);
-  const [isSubMenu2, setIsSubmenu2] = useState(false);
-  const staff = [
-    {
-      attributes: {
-        title: "Meet Our Dentists & Staffs",
-        slug: "meet-our-dentists-staffs",
-      },
-    },
-  ];
+  const [isSubMenu, setIsSubmenu] = useState(false);
+
+
   return (
-    <div className="">
-      <div className="max-w-[1200px] mx-auto lg:px-0 px-4">
-        <div className="flex items-center justify-between">
-          <div className="py-[27px]">
-            <Link href={"/"} >
+    <div className="relative overflow-visible bg-white shadow-lg wrapper">
+      <div className="max-w-[1156px] mx-auto px-4">
+        <div className="flex items-center justify-between w-full h-full">
+          <div className="lg:py-[19.5px] py-2 flex items-center ">
+            <Link href="/">
                 <Image
                   src={imageResolver(data?.Logo).path}
-                  alt={data?.Logo?.data?.attributes?.alternativeText}
-                  className="cursor-pointer w-fit h-fit"
-                  loading="lazy"
-                  width={247}
-                  height={48}
                   loader={()=>imageResolver(data?.Logo).path}
+                  width="250px"
+                  height="48.9px"
+                  loading="lazy"
+                  alt={data?.Logo?.data?.attributes?.alternativeText}
+                  className="cursor-pointer"
                 />
             </Link>
           </div>
-          <div className="lg:flex hidden items-center px-[8px]">
-            {data?.navItems?.map((item, index) => (
-              <div key={index} className="relative overflow-visible ">
-                <Link href={item.link || "/"}>
+          <div className="">
+            <div className="hidden px-4 lg:flex">
+              {data?.navItems?.map((item, index) => {
+                return <div key={index} className="pr-[40px]  overflow-visible">
                   <div
-                    onMouseEnter={() => {
-                      index === 1 && setIsSubmenu1(true),
-                        index === 2 && setIsSubmenu2(true);
-                    }}
-                    onMouseLeave={() => {
-                      index === 1 && setIsSubmenu1(false),
-                        index === 2 && setIsSubmenu2(false);
-                    }}
-                    key={index}
-                    className="xl:px-[12px] px-[5px] flex items-center"
+                    onMouseEnter={() => index === 1 && setIsSubmenu(true)}
+                    className={`flex  ${styles.cusMenu}`}
                   >
-                    <>
-                      <p
-                        className={`text-[14px] font-[600] tracking-wider leading-[32px] text-center  cursor-pointer ${
-                          currentRoute === item.link
-                            ? "text-[#5F2EEA]"
-                            : "text-[#6E7191]"
-                        }`}
-                      >
-                          {item.title}
-                      </p>
-                      <div className={`${index !== 1 && "hidden"}`}>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="10"
-                          height="10"
-                          fill="currentColor"
-                          className="bi bi-caret-down-fill ml-[5px]"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                        <div className={`${!isSubMenu1 && "hidden"}`}>
-                          <Dropdown
-                            onChange={setIsSubmenu1}
-                            data={staff}
-                            single
-                          />
-                        </div>
+                    <p className={`text-[13px] leading-[20px] cursor-pointer font-[500]  hover:text-[#963A2F] ${currentRoute == item.link ? "text-[#963A2F]" : "text-[#3B5266]"} `}>
+                      {index === 5 ? (
+                        <span onClick={toggle}>{item.title}</span>
+                      ) : (
+                        <Link href={`${item.link}`}><a href={`${item.link}`} className="">{item.title}</a></Link>
+                      )}
+                    </p>
+                    <Modal
+                      isShowing={isShowing}
+                      hide={toggle}
+                      ourservices={ourservices}
+                    />
+                      <div className={`${index !== 1?"hidden":""}`}>
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-5 h-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </span>
+                        
+                          <MegaMenu isSubMenu={isSubMenu} data={navCat} services={navServices} setIsSubmenu={setIsSubmenu} />
                       </div>
-                      <div className={`${index !== 2 && "hidden"}`}>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="10"
-                          height="10"
-                          fill="currentColor"
-                          className="bi bi-caret-down-fill ml-[5px]"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                        <div className={`${!isSubMenu2 && "hidden"}`}>
-                          <Dropdown
-                            onChange={setIsSubmenu2}
-                            data={navServices}
-                          />
-                        </div>
-                      </div>
-                    </>
                   </div>
-                </Link>
-              </div>
-            ))}
-            <Link href={`tel:+${`925-933-5677`}`}  >
-              <p className="xl:ml-[15px] ml-[4px] bg-[#5F2EEA] text-white text-[15px] leading-[15px] font-[500] py-[10px] px-[15px] rounded-3xl">
-                Call Us
-              </p>
-            </Link>
-          </div>
-          <div className="lg:hidden flex items-center min-h-full h-[62px] ">
-            <Hamburger
-              isMenu={isMenu}
-              setIsMenu={setIsMenu}
-              isSubMenu1={isSubMenu1}
-              setIsSubmenu1={setIsSubmenu1}
-              isSubMenu2={isSubMenu2}
-              setIsSubmenu2={setIsSubmenu2}
-              data={data}
-              navServices={navServices}
-              staff={staff}
-            />
+                </div>
+})}
+            </div>
+            <div className="lg:hidden flex items-center min-h-full h-[62px]">
+              <Hamburger
+                isMenu={isMenu}
+                setIsMenu={setIsMenu}
+                isSubMenu={isSubMenu}
+                setIsSubmenu={setIsSubmenu}
+                data={data}
+                navServices={navServices}
+                navCat={navCat}
+                toggle={toggle}
+                isShowing={isShowing}
+                ourservices={ourservices}
+              
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default Navbar;
+export default Header;
