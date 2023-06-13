@@ -5,6 +5,7 @@ import BlogCard from "../BlogCard";
 
 
 const PaginatedServices = ({data}) => {
+  console.log("Data---",data)
   const [currentItems, setCurrentItems] = useState(null);
 	const [pageCount, setPageCount] = useState(0);
 	const [itemOffset, setItemOffset] = useState(0);

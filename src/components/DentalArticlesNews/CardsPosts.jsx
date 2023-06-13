@@ -1,29 +1,31 @@
 import React from "react";
 import { imageResolver } from "../../../utils/image-resolver";
+import Image from "next/image";
 
 const CardsPosts = ({ data }) => {
   return (
     <div>
-      <div className="cursor-pointer">
-        {/* <img
-          src={imageResolver(data?.attributes?.image).path}
-          alt="Posts image"
-        /> */}
+      <div className="cursor-pointer relative w-[100%] h-[200px] object-cover">
         {data?.attributes?.image?.data !== null ? (
-            <img
-              src={imageResolver(data?.attributes?.image).path}
-              alt={data?.attributes?.image?.data?.attributes?.alternativeText}
-              className='rounded-t-xl	h-[190px]  w-full'
-              loading="lazy"
-            />
-          ) : (
-            <img
-              src={`https://adminpwdds.vigorant.xyz/uploads/${data?.attributes?.imagePath}`}
-              alt={data?.attributes?.imagePath?.data?.attributes?.alternativeText}
-              className='rounded-t-xl	h-[200px]  w-full'
-              loading="lazy"
-            />
-          )}
+          <Image
+            src={imageResolver(data?.attributes?.image).path}
+            alt={data?.attributes?.image?.data?.attributes?.alternativeText}
+            className="rounded-t-xl	h-[190px] object-cover w-full"
+            loading="lazy"
+            loader={() => imageResolver(Data?.attributes?.image).path}
+          />
+        ) : (
+          <Image
+            src={`https://adminpwdds.vigorant.xyz/uploads/${data?.attributes?.imagePath}`}
+            alt={data?.attributes?.imagePath?.data?.attributes?.alternativeText}
+            className="rounded-t-xl	h-[200px]  object-cover w-full"
+            loading="lazy"
+            loader={() =>
+              `https://adminpwdds.vigorant.xyz/uploads/${data?.attributes?.imagePath}`
+            }
+            layout="fill"
+          />
+        )}
       </div>
       <h2 className="cursor-pointer text-[18px] leading-[22px] text-[#14142a] font-[700] mb-[20px] mt-[20px]">
         {data?.attributes?.title}

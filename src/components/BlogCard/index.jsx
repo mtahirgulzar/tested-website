@@ -2,7 +2,7 @@ import React from "react";
 import ServiceCards from "../Services/ServiceCards";
 
 const BlogCard = ({ data, home, dental, cardsData, itemOffset }) => {
-
+ 
   return (
     <div>
       <section
