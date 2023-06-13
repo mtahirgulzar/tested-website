@@ -53,7 +53,7 @@ export async function getStaticProps() {
               new Date(a.attributes.publishedAt)
           )
           .slice(0, 12) || null,
-      cutServices: cutServices?.data,
+      cutServices: cutServices?.data  || null,
     },
   };
 }

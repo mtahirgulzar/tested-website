@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { imageResolver } from "../../../../utils/image-resolver";
+import Image from "next/image";
 
 const ServiceCards = ({ card, home, dental, index }) => {
   function getWordStr(str) {
@@ -12,7 +13,8 @@ const ServiceCards = ({ card, home, dental, index }) => {
         dental
           ? `/dental-articles-news/${card?.attributes?.slug}`
           : `/services/${card?.attributes?.slug}`
-      } legacyBehavior
+      }
+      legacyBehavior
     >
       <div
         className={`${
@@ -29,17 +31,25 @@ const ServiceCards = ({ card, home, dental, index }) => {
           {card?.attributes?.category?.data?.attributes?.name}
         </div>
         <div>
-          {card?.attributes?.image?.data !== null ? (
-            <img
+          {card?.attributes?.image?.data  ? (
+            <Image
               src={imageResolver(card?.attributes?.image).path}
-              alt=""
-              className="rounded-t-xl	h-[130px] object-cover w-full"
+              alt={card?.attributes?.image?.data?.attributes?.url}
+              loader={() => imageResolver(card?.attributes?.image).path}
+              width={262}
+              height={130}
+              className="rounded-t-xl	 object-cover "
             />
           ) : (
-            <img
+            <Image
               src={`https://adminpwdds.vigorant.xyz/uploads/${card?.attributes?.imagePath}`}
               alt=""
-              className="rounded-t-xl	h-[200px] object-cover  w-full"
+              width={262}
+              height={200}
+              loader={() =>
+                `https://adminpwdds.vigorant.xyz/uploads/${card?.attributes?.imagePath}`
+              }
+              className="rounded-t-xl h-[130px]	object-cover"
             />
           )}
         </div>
@@ -75,7 +85,8 @@ const ServiceCards = ({ card, home, dental, index }) => {
               dental
                 ? `/dental-articles-news/${card?.attributes?.slug}`
                 : `/services/${card?.attributes?.slug}`
-            } legacyBehavior
+            }
+            legacyBehavior
           >
             <a
               className={`cursor-pointer font-[500] text-[14px] leading-[24px] text-[#5F2EEA] rounded-full ${

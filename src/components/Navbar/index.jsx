@@ -4,6 +4,7 @@ import { imageResolver } from "../../../utils/image-resolver";
 import { useRouter } from "next/router";
 import Hamburger from "../Hamburger";
 import Dropdown from "./Dropdown";
+import Image from "next/image";
 
 const Navbar = ({ data, navServices }) => {
   const router = useRouter();
@@ -25,11 +26,14 @@ const Navbar = ({ data, navServices }) => {
         <div className="flex items-center justify-between">
           <div className="py-[27px]">
             <Link href={"/"} >
-                <img
+                <Image
                   src={imageResolver(data?.Logo).path}
                   alt={data?.Logo?.data?.attributes?.alternativeText}
                   className="cursor-pointer w-fit h-fit"
                   loading="lazy"
+                  width={247}
+                  height={48}
+                  loader={()=>imageResolver(data?.Logo).path}
                 />
             </Link>
           </div>

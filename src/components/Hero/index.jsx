@@ -87,10 +87,12 @@ const Hero = ({ data }) => {
           </div>
           <div className="relative order-1 w-full md:p-0 md:order-none">
             <div className="absolute top-0 md:left-0 -left-[200px] z-10">
-              <img
+              <Image
                 src={imageResolver(data?.hero?.image).path}
                 alt="image"
-                className=""
+                loader={() => imageResolver(data?.hero?.image).path}
+                width={657}
+                height={684}
               />
             </div>
             <div className="md:px-[25px] px-4 py-[15px] flex gap-x-[25px] max-w-[280px] sm:max-w-xs  absolute sm:top-0 -top-8  right-0 xl:left-0 lg:-left-10 md:-left-40 bg-white bg-opacity-70 rounded-[12px] z-10">
@@ -102,12 +104,14 @@ const Hero = ({ data }) => {
                   legacyBehavior
                 >
                   <a href="https://www.google.com/maps/place/2229+Olympic+Blvd,+Walnut+Creek,+CA+94595,+USA/@37.8853168,-122.0783427,17z/data=!3m1!4b1!4m6!3m5!1s0x808561fa69d04041:0xdc8060ec44af91bb!8m2!3d37.8853168!4d-122.076154!16s%2Fg%2F11b8v416ps">
-                    <img
+                    <Image
                       src={imageResolver(data?.hero.card?.img).path}
                       alt={
                         data?.hero?.card?.img?.data?.attributes?.alternativeText
                       }
-                      className="w-fit h-fit"
+                      width={44}
+                      height={44}
+                      loader={() => imageResolver(data?.hero?.card?.img).path}
                     />
                   </a>
                 </Link>
@@ -134,14 +138,16 @@ const Hero = ({ data }) => {
               <div className="flex flex-col">
                 <div className="flex gap-x-[25px] mb-[25px] items-center">
                   <div className="">
-                    <img
+                    <Image
                       src={imageResolver(data?.hero?.hours?.image).path}
                       alt={
                         data?.hero?.hours?.image?.data?.attributes
                           ?.alternativeText
                       }
-                      className=""
                       loading="lazy"
+                      loader={() => imageResolver(data?.hero?.hours?.image).path}
+                      width={44}
+                      height={44}
                     />
                   </div>
                   <div className="">

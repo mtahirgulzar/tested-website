@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { imageResolver } from "../../../utils/image-resolver";
+import Image from "next/image";
 
 const CommonHero = ({ data, testimonial, blog }) => {
   return (
@@ -42,9 +43,12 @@ const CommonHero = ({ data, testimonial, blog }) => {
               
                 <Link href={"#blogbody"} legacyBehavior>
                   <a href="" className="">
-                  <img
+                  <Image
                     src="/images/Frame-226-2.webp"
                     alt="hero image"
+                    height={170}
+                    width={23}
+                    loader={()=>`/images/Frame-226-2.webp`}
                     className="cursor-pointer w-fit h-fit"
                     loading="lazy"
                   />

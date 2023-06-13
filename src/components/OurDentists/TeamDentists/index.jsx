@@ -1,6 +1,7 @@
 import React from "react";
 import { imageResolver } from "../../../../utils/image-resolver";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
 const TeamDentists = ({ data }) => {
   return (
@@ -15,19 +16,33 @@ const TeamDentists = ({ data }) => {
                   : "lg:order-1 lg:justify-end"
               }`}
             >
-              <img
-                src={imageResolver(item.image).path}
-                alt={data?.image?.data?.attributes?.alternativeText}
-                className="w-fit h-fit rounded-xl"
-                loading="lazy"
-              />
+              <div className="w-full h-full relative">
+                <Image
+                  src={imageResolver(item.image).path}
+                  alt={data?.image?.data?.attributes?.alternativeText}
+                  className="w-fit h-fit rounded-xl"
+                  loading="lazy"
+                  // width={480}
+                  // height={600}
+                  layout="fill"
+                  loader={() => imageResolver(item.image).path}
+                />
+              </div>
             </div>
             <div
               className={`relative ${
                 index === 1 ? "lg:order-1" : "lg:order-2"
               } cus-team-style`}
             >
-              <img src="/static/images/slo.png" loading="lazy" alt="dental" className="absolute left-[-96px] top-[33px] -z-10" />
+              <Image
+                src="/static/images/slo.png"
+                loading="lazy"
+                alt="dental"
+                width={325}
+                height={92}
+                loader={() => `/static/images/slo.png`}
+                className="absolute left-[-96px] top-[33px] -z-10"
+              />
               <ReactMarkdown>{item?.details}</ReactMarkdown>
             </div>
           </div>

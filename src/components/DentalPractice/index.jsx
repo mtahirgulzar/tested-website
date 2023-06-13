@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { imageResolver } from "../../../utils/image-resolver";
+import Image from "next/image";
 
 const DentalPractice = ({ data }) => {
   return (
@@ -10,10 +11,13 @@ const DentalPractice = ({ data }) => {
         <div className="max-w-[1200px] px-4 xl:px-0 mx-auto md:py-[50px]  py-1">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-[38px]">
             <div className="relative rounded-md mb-[200px] md:mb-[0px]">
-              <img
+              <Image
                 src={imageResolver(data?.image).path}
                 alt={data?.image?.data?.attributes?.alternativeText}
                loading="lazy"
+               width={565}
+               height={416}
+               loader={()=>imageResolver(data?.image).path}
                 className="w-full h-full rounded-md"
               />
               <div className="absolute bottom-[0px] lg:bottom-[55%]  sm:bottom-[-30px] right-0  left-0 lg:-left-20 lg:right-40 rounded-[16px]	flex justify-between  sm:gap-[15px] lg:gap-[25px] text-[#ffff] items-center w-30  saturate-200 backdrop-blur-[22.5px] bg-[#0b072473] sm:p-[8px] lg:p-[24px] ">
