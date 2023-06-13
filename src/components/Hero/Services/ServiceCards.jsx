@@ -30,22 +30,20 @@ const ServiceCards = ({ card, home, dental, index }) => {
         <div className="absolute left-[5px]  bg-white text-black px-[2px] py-[1px] rounded-md text-[12px]">
           {card?.attributes?.category?.data?.attributes?.name}
         </div>
-        <div>
+        <div className="relative w-[100%] h-[130px]">
           {card?.attributes?.image?.data  ? (
             <Image
               src={imageResolver(card?.attributes?.image).path}
               alt={card?.attributes?.image?.data?.attributes?.url}
               loader={() => imageResolver(card?.attributes?.image).path}
-              width={262}
-              height={130}
+              layout="fill"
               className="rounded-t-xl	 object-cover "
             />
           ) : (
             <Image
               src={`https://adminpwdds.vigorant.xyz/uploads/${card?.attributes?.imagePath}`}
               alt=""
-              width={262}
-              height={200}
+              layout="fill"
               loader={() =>
                 `https://adminpwdds.vigorant.xyz/uploads/${card?.attributes?.imagePath}`
               }
