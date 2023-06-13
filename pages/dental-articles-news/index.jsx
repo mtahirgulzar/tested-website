@@ -5,7 +5,7 @@ import PaginatedServices from "../../src/components/PaginatedServices";
 import OurServices from "../../src/components/Services";
 import { adminPath } from "../../utils/constants";
 
-const DentalNews = ({ pageData, siteData, navServices,blogsData }) => {
+const DentalArticleNews = ({ pageData, siteData, navServices,blogsData }) => {
 
   return (
     <Layout data={siteData} SeoData={pageData?.seo} navServices={navServices}>
@@ -17,7 +17,7 @@ const DentalNews = ({ pageData, siteData, navServices,blogsData }) => {
   );
 };
 
-export default DentalNews;
+export default DentalArticleNews;
 
 export async function getStaticProps() {
   let pageData = null;

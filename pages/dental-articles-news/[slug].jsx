@@ -5,7 +5,7 @@ import Types from "../../src/components/DentalArticlesNews/Types";
 import CommonHero from "../../src/components/CommonHero";
 import Author from "./author"
 
-const OurPractice = ({ siteData, singleService, navServices, blogsData }) => {
+const Index = ({ siteData, singleService, navServices, blogsData }) => {
   return (
     <Layout data={siteData} navServices={navServices} SeoData={singleService?.SEO}>
       <CommonHero data={singleService} testimonial blog />
@@ -14,7 +14,7 @@ const OurPractice = ({ siteData, singleService, navServices, blogsData }) => {
   );
 };
 
-export default OurPractice;
+export default Index;
 export async function getStaticPaths() {
   const blogData = await (
     await fetch(`${adminPath}/blogs?fields[0]=slug`)
