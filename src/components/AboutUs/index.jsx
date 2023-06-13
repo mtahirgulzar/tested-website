@@ -12,13 +12,13 @@ const AboutUs = ({ title }) => {
 		slider.appendChild(script); 
 	},[])
   return (
-    <div className="">
+    < >
       <div className="sm:py-[75px] py-[40px]">
         <Title data={title} red />
         <div id="trustSlider" className="max-w-[1156px] mx-auto bg-white p-[35px] flex flex-col justify-center">
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
