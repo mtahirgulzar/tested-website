@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { imageResolver } from "../../../utils/image-resolver";
+import Image from "next/image";
 
 const ServiceCards = ({ card, home, dental, index }) => {
   function getWordStr(str) {
@@ -28,17 +29,22 @@ const ServiceCards = ({ card, home, dental, index }) => {
         <div className="absolute left-[5px]  bg-white text-black px-[2px] py-[1px] rounded-md text-[12px]">
           {card?.attributes?.category?.data?.attributes?.name}
         </div>
-        <div>
-          {card?.attributes?.image?.data !== null ? (
-            <img
+        <div className="relative w-[100%] h-[130px]">
+          {card?.attributes?.image?.data   ? (
+            <Image
               src={imageResolver(card?.attributes?.image).path}
+              loader={()=>imageResolver(card?.attributes?.image).path}
+              layout="fill"
               alt=""
               className="rounded-t-xl	h-[130px] object-cover w-full"
+              
             />
           ) : (
-            <img
+            <Image
               src={`https://adminpwdds.vigorant.xyz/uploads/${card?.attributes?.imagePath}`}
               alt=""
+              layout="fill"
+              loader={()=>`https://adminpwdds.vigorant.xyz/uploads/${card?.attributes?.imagePath}`}
               className="rounded-t-xl	h-[200px] object-cover  w-full"
             />
           )}

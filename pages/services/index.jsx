@@ -5,40 +5,6 @@ import OurServices from "../../src/components/Services";
 import { adminPath } from "../../utils/constants";
 
 const Services = ({ pageData, siteData, navServices, cutServices }) => {
-  // const cardsData = [
-  //   {
-  //     id: "1",
-  //     img: "/static/images/smiling.png",
-  //     title: "Dental Implants",
-  //     line: "/static/images/Line3.png",
-  //     txt: "The modern-day alternative for bridges and dentures. ",
-  //     btn: "More About Dental Implants",
-  //   },
-  //   {
-  //     id: "2",
-  //     img: "/static/images/dentistry1.png",
-  //     title: "Family Dentistry",
-  //     line: "/static/images/Line3.png",
-  //     txt: "Our dental clinic serves infants to the elderly, making it a complete dental solution for you and your family.",
-  //     btn: "More About Family Dentistry",
-  //   },
-  //   {
-  //     id: "3",
-  //     img: "/static/images/young.png",
-  //     title: "Root Canal Therapy",
-  //     line: "/static/images/Line3.png",
-  //     txt: "Worry no more; our team of expert endodontists is available to help you. ",
-  //     btn: "More About Root Canal",
-  //   },
-  //   {
-  //     id: "4",
-  //     img: "/static/images/woman.png",
-  //     title: "Invisalign",
-  //     line: "/static/images/Line3.png",
-  //     txt: "These are the most efficient yet discreet aligners out there.",
-  //     btn: "More About Invisalign",
-  //   },
-  // ];
   return (
     <Layout data={siteData} navServices={navServices} SeoData={pageData?.seo}>
       <CommonHero data={pageData?.hero} blog />

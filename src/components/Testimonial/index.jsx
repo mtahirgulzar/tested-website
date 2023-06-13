@@ -228,26 +228,6 @@ const index = () => {
             })}
           </div>
         </div>
-{/* 
-        <div className="md:py-[70px] py-[50px]">
-        <div className="flex justify-center">
-          <div>
-            <h2 className="lg:text-[50px] lg:leading-[24px] md:text-[42px] md:leading-[22px] text-[36px] leading-[20px] font-[700] tracking-[0.7px] text-[#14142A]">
-              Testimonials
-            </h2>
-            <p className="text-center pt-5 text-[16px] leading-[24px] tracking-[0.75px] text-[#4e4b66]">Email Reviews</p>
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-[18px] gap-[30px] lg:pb-[74px] md:pb-[40px] pb-0">
-          {CardsData3.map((card , index) => {
-            const { title, description} = card;
-            return (
-              <Blogcards key={index} description={description} title={title} />
-            );
-          })}
-        </div>
-        </div> */}
       </section>
     </div>
   );
